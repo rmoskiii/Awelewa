@@ -24,6 +24,7 @@ const IMG = {
     hero:     "/images/hero.jpg",      // IMG_0056
     look:     "/images/look.jpg",      // IMG_0035 — profile portrait
     rack:     "/images/rack.jpg",      // IMG_0068 — garment rack
+    beach:    "/images/lewaaa.JPG",
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -666,6 +667,19 @@ function RackFeature() {
         </div>
     );
 }
+function LifestyleStrip() {
+    const { ref, visible } = useFadeIn(0.05);
+    return (
+        <div ref={ref} className={`rack fade${visible ? " fade--in" : ""}`}
+             aria-label="Àwéléwà in the wild" style={{ height: "clamp(350px, 55vw, 580px)" }}>
+            <img src={IMG.beach} alt="Àwéléwà trousers on the beach" style={{ objectPosition: "left 85%" }} />
+            <div className="rack__caption">
+                <p className="rack__caption-title">Wear it anywhere.</p>
+                <p className="rack__caption-sub">Built for movement.<br />Made to be lived in.</p>
+            </div>
+        </div>
+    );
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // COLLECTIONS
@@ -858,6 +872,7 @@ export default function App() {
                 <EditorialSplit />
                 <RackFeature />
                 <Collections />
+                <LifestyleStrip />
                 <CraftQuote />
                 <Campaign />
             </main>
