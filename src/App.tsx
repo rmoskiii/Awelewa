@@ -31,28 +31,42 @@ const IMG = {
 // GLOBAL CSS
 // ─────────────────────────────────────────────────────────────────────────────
 const CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Josefin+Sans:wght@200;300;400&display=swap');
-
-  :root {
-    --white:      #FFFFFF;
-    --brown:      #3D1A08;
-    --brown-mid:  #604f43;
-    --sand:       #D6B297;
-    --terracotta: #9B4A1F;
-    --cream-tint: #F7F0E6;
-    --border:     rgba(61,26,8,.1);
-
-    --font-display: 'Cormorant Garamond', Georgia, serif;
-    --font-ui:      'Josefin Sans', system-ui, sans-serif;
-    --pad-x: clamp(24px, 6vw, 108px);
-    --pad-y: clamp(72px, 10vw, 148px);
-    --ease:  cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  @font-face {
+    font-family: 'Mansory';
+    src: url('/fonts/Mansory Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
   }
+
+  @font-face {
+    font-family: 'Mansory';
+    src: url('/fonts/Mansory Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  * {
+    font-family: 'Mansory', sans-serif;
+  }
+
+:root {
+    --white:        #FFFFFF;
+    --brown:        #3D1A08;
+    --brown-mid:    #604f43;
+    --sand:         #D6B297;
+    --terracotta:   #9B4A1F;
+    --cream-tint:   #F7F0E6;
+    --border:       rgba(61,26,8,.1);
+    --pad-x:        clamp(20px, 5vw, 108px);
+    --pad-y:        clamp(56px, 8vw, 120px);
+    --ease:         cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --font-display: 'Mansory', sans-serif;
+    --font-ui:      'Mansory', sans-serif;
+}
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html  { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-  body  { background: var(--white); color: var(--brown); font-family: var(--font-ui); font-weight: 300; overflow-x: hidden; }
-  img   { display: block; width: 100%; height: 100%; object-fit: cover; }
+  body  { background: var(--white); color: var(--brown); font-weight: 400; overflow-x: hidden; }  img   { display: block; width: 100%; height: 100%; object-fit: cover; }
   a     { color: inherit; text-decoration: none; }
   button{ background: none; border: none; cursor: pointer; font-family: inherit; color: inherit; padding: 0; }
   ul,ol { list-style: none; }
@@ -80,7 +94,7 @@ const CSS = `
   .nav__links { display: flex; gap: 48px; }
   .nav__link {
     font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
-    opacity: .55; border-bottom: 1px solid transparent;
+    opacity: .75; border-bottom: 1px solid transparent;
     padding-bottom: 2px;
     transition: opacity .2s ease, border-color .2s ease;
   }
@@ -109,12 +123,11 @@ const CSS = `
 
   /* ── HERO ── */
   .hero {
-    position: relative; height: 100svh; min-height: 640px;
+    position: relative; height: 55svh; min-height: 380px;
     display: flex; align-items: flex-end; overflow: hidden;
   }
   .hero__img { position: absolute; inset: 0; }
-  .hero__img img { object-position: center top; }
-  .hero__overlay {
+  .hero__img img { object-position: center 35%; }  .hero__overlay {
     position: absolute; inset: 0;
     background: linear-gradient(to top,
       rgba(20,8,2,.75) 0%,
@@ -129,10 +142,11 @@ const CSS = `
   .hero__eyebrow {
     font-size: 9px; letter-spacing: .46em; text-transform: uppercase;
     color: rgba(255,255,255,.5); margin-bottom: 20px;
+    font-weight: 500;
   }
   .hero__heading {
     font-family: var(--font-display);
-    font-size: clamp(52px, 10vw, 120px); font-weight: 500; font-style: italic;
+    font-size: clamp(52px, 10vw, 80px); font-weight: 500; font-style: italic;
     line-height: .92; letter-spacing: -.02em; color: #fff;
     margin-bottom: 36px; max-width: 780px;
   }
@@ -170,6 +184,7 @@ const CSS = `
     flex-shrink: 0; padding-right: 80px;
     font-size: 9px; letter-spacing: .42em; text-transform: uppercase;
     color: rgba(255,255,255,.5);
+    font-weight: 500;
   }
   @keyframes marquee {
     from { transform: translateX(0); }
@@ -182,6 +197,7 @@ const CSS = `
     font-size: 9px; letter-spacing: .42em; text-transform: uppercase;
     opacity: .45; display: flex; align-items: center; gap: 16px;
     margin-bottom: clamp(32px, 4.5vw, 56px);
+    font-weight: 500;
   }
   .eyebrow::after { content:''; display:block; width:36px; height:1px; background:currentColor; }
   .heading {
@@ -206,7 +222,7 @@ const CSS = `
   }
   .statement__rule { margin: 0 auto 40px; }
   .statement__attrs { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px 48px; }
-  .statement__attr { font-size: 9px; letter-spacing: .46em; text-transform: uppercase; opacity: .4; }
+  .statement__attr { font-size: 9px; letter-spacing: .46em; text-transform: uppercase; opacity: .4, font-weight: 500; }
 
   /* ── EDITORIAL SPLIT ── */
   .editorial {
@@ -276,7 +292,7 @@ const CSS = `
   .card__frame img { transition: transform 1.6s var(--ease); }
   .card:hover .card__frame img { transform: scale(1.06); }
   .card__meta { padding: 18px 0 8px; }
-  .card__vol { font-size: 9px; letter-spacing: .4em; text-transform: uppercase; opacity: .42; margin-bottom: 6px; }
+  .card__vol { font-size: 9px; letter-spacing: .4em; text-transform: uppercase; opacity: .42; margin-bottom: 6px, font-weight: 500; }
   .card__title {
     font-family: var(--font-display);
     font-size: clamp(18px,2vw,24px); font-weight: 500; color: var(--brown);
@@ -299,8 +315,7 @@ const CSS = `
   /* ── CRAFT DARK QUOTE ── */
   .craft {
     background: var(--brown);
-    padding: clamp(88px,12vw,148px) clamp(24px,10vw,200px);
-    text-align: center;
+    padding: clamp(44px,6vw,72px) clamp(20px,8vw,120px);    text-align: center;
   }
   .craft__mark { margin: 0 auto 44px; opacity: .2; }
   .craft__quote {
@@ -311,6 +326,7 @@ const CSS = `
   .craft__attr {
     margin-top: 36px; font-size: 9px; letter-spacing: .38em; text-transform: uppercase;
     color: var(--sand); opacity: .45;
+    font-weight: 500;
   }
 
   /* ── CAMPAIGN PANELS ── */
@@ -429,6 +445,17 @@ const CSS = `
     .footer__links { grid-template-columns:1fr; }
     .email-strip { flex-direction:column; align-items:flex-start; }
     .email-strip__input { width:100%; }
+    .hero__heading { font-size: clamp(32px, 8vw, 48px); }
+    .hero__body { padding: 0 20px 36px; }
+    .statement { padding: 52px 20px; }
+    .craft { padding: 44px 24px; }
+    .editorial { min-height: auto; }
+    .editorial__body { padding: 40px 20px; }
+    .rack__caption { flex-direction: column; gap: 8px; }
+    .rack__caption-sub { text-align: left; }
+    .footer__top { flex-direction: column; }
+    .email-strip__form { width: 100%; }
+    .email-strip__input { width: 100%; }
   }
   @media(prefers-reduced-motion:reduce) {
     .fade { transition:none; opacity:1; transform:none; }

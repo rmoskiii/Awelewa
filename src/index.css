@@ -1,1 +1,19 @@
+@font-face {
+  font-family: 'Mansory';
+  src: url('/fonts/Mansory Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mansory';
+  src: url('/fonts/Mansory Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  font-family: 'Mansory', sans-serif;
+}
+
 /* intentionally empty — styles injected by App.tsx */
