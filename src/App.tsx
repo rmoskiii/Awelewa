@@ -141,8 +141,7 @@ const CSS = `
   }
   .hero__eyebrow {
     font-size: 9px; letter-spacing: .46em; text-transform: uppercase;
-    color: rgba(255,255,255,.5); margin-bottom: 20px;
-    font-weight: 500;
+    color: rgba(255,255,255,.85); margin-bottom: 20px;    font-weight: 500;
   }
   .hero__heading {
     font-family: var(--font-display);
@@ -195,7 +194,7 @@ const CSS = `
   .section { padding: var(--pad-y) var(--pad-x); }
   .eyebrow {
     font-size: 9px; letter-spacing: .42em; text-transform: uppercase;
-    opacity: .45; display: flex; align-items: center; gap: 16px;
+    opacity: .7; display: flex; align-items: center; gap: 16px;    
     margin-bottom: clamp(32px, 4.5vw, 56px);
     font-weight: 500;
   }
@@ -217,13 +216,11 @@ const CSS = `
   }
   .statement__quote {
     font-family: var(--font-display);
-    font-size: clamp(28px, 4.8vw, 60px); font-style: italic; font-weight: 400;
-    line-height: 1.28; color: var(--brown); max-width: 840px; margin: 0 auto 40px;
+    font-size: clamp(30px, 5vw, 64px); font-style: italic; font-weight: 500;    line-height: 1.28; color: var(--brown); max-width: 840px; margin: 0 auto 40px;
   }
   .statement__rule { margin: 0 auto 40px; }
   .statement__attrs { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px 48px; }
-  .statement__attr { font-size: 9px; letter-spacing: .46em; text-transform: uppercase; opacity: .4, font-weight: 500; }
-
+  .statement__attr { font-size: 10px; letter-spacing: .38em; text-transform: uppercase; opacity: .65; font-weight: 500; }
   /* ── EDITORIAL SPLIT ── */
   .editorial {
     display: grid; grid-template-columns: 1.1fr 1fr;
@@ -241,8 +238,8 @@ const CSS = `
   }
   .editorial__body .heading { margin-bottom: 32px; }
   .editorial__body p {
-    font-size: clamp(15px, 1.5vw, 17px); line-height: 1.9;
-    opacity: .7; max-width: 440px;
+    font-size: clamp(15px, 1.5vw, 18px); line-height: 1.9;
+    opacity: .88; max-width: 440px; font-weight: 500;
   }
   .editorial__body p + p { margin-top: 18px; }
   .editorial__link {
@@ -276,8 +273,7 @@ const CSS = `
   }
   .rack__caption-sub {
     font-size: 9px; letter-spacing: .38em; text-transform: uppercase;
-    color: rgba(255,255,255,.45); text-align: right;
-  }
+    color: rgba(255,255,255,.75); text-align: right; font-weight: 500;  }
 
   /* ── COLLECTIONS ── */
   .collections__grid {
@@ -292,8 +288,7 @@ const CSS = `
   .card__frame img { transition: transform 1.6s var(--ease); }
   .card:hover .card__frame img { transform: scale(1.06); }
   .card__meta { padding: 18px 0 8px; }
-  .card__vol { font-size: 9px; letter-spacing: .4em; text-transform: uppercase; opacity: .42; margin-bottom: 6px, font-weight: 500; }
-  .card__title {
+  .card__vol { font-size: 10px; letter-spacing: .32em; text-transform: uppercase; opacity: .65; margin-bottom: 6px; font-weight: 500; }  .card__title {
     font-family: var(--font-display);
     font-size: clamp(18px,2vw,24px); font-weight: 500; color: var(--brown);
   }
@@ -320,8 +315,7 @@ const CSS = `
   .craft__mark { margin: 0 auto 44px; opacity: .2; }
   .craft__quote {
     font-family: var(--font-display);
-    font-size: clamp(22px,3.8vw,46px); font-style:italic; font-weight:400;
-    line-height: 1.5; color: var(--cream-tint); max-width: 820px; margin: 0 auto;
+    font-size: clamp(24px,4vw,50px); font-style:italic; font-weight:500;    line-height: 1.5; color: var(--cream-tint); max-width: 820px; margin: 0 auto;
   }
   .craft__attr {
     margin-top: 36px; font-size: 9px; letter-spacing: .38em; text-transform: uppercase;
@@ -344,8 +338,7 @@ const CSS = `
   .campaign__body { position:relative; z-index:2; text-align:center; padding:48px; }
   .campaign__label {
     display:block; font-size:9px; letter-spacing:.46em; text-transform:uppercase;
-    color:rgba(255,255,255,.55); margin-bottom:14px;
-  }
+    color:rgba(255,255,255,.85); margin-bottom:14px; font-weight: 500;  }
   .campaign__title {
     font-family:var(--font-display);
     font-size:clamp(26px,4vw,52px); font-weight:500; line-height:1.08;
@@ -406,8 +399,8 @@ const CSS = `
   }
   .footer__sub {
     font-size:9px; letter-spacing:.22em; text-transform:uppercase;
-    color:rgba(255,255,255,.3); line-height:2; max-width:260px;
-  }
+    color:rgba(255,255,255,.6); line-height:2; max-width:260px; font-weight: 500;  }
+    color:rgba(255,255,255,.4); transition:color .2s ease;
   .footer__links {
     display:grid; grid-template-columns:repeat(2,1fr); gap:16px 72px;
   }
