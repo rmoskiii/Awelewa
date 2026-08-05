@@ -314,16 +314,22 @@ const CSS = `
   /* ── CRAFT DARK QUOTE ── */
   .craft {
     background: var(--brown);
-    padding: clamp(44px,6vw,72px) clamp(20px,8vw,120px);    text-align: center;
+    padding: clamp(28px,3.5vw,44px) clamp(20px,8vw,120px); text-align: center;
   }
-  .craft__mark { margin: 0 auto 44px; opacity: .2; }
+  .craft__mark {
+    margin: 0 auto 44px; opacity: .2;
+    width: 48px; height: 48px;
+  }
+  .craft__mark img {
+    width: 100%; height: 100%; object-fit: contain;
+  }
   .craft__quote {
     font-family: var(--font-display);
-    font-size: clamp(24px,4vw,50px); font-style:italic; font-weight:500;    line-height: 1.5; color: var(--cream-tint); max-width: 820px; margin: 0 auto;
+    font-size: clamp(14px,2vw,22px); font-style:italic; font-weight:400;   line-height: 1.5; color: var(--cream-tint); max-width: 820px; margin: 0 auto;
   }
   .craft__attr {
-    margin-top: 36px; font-size: 9px; letter-spacing: .38em; text-transform: uppercase;
-    color: var(--sand); opacity: .45;
+    margin-top: 20px; font-size: 10px; letter-spacing: .38em; text-transform: uppercase;
+    color: var(--sand); opacity: 1;
     font-weight: 500;
   }
 
@@ -386,7 +392,7 @@ const CSS = `
   /* ── FOOTER ── */
   .footer {
     background: var(--brown);
-    padding: clamp(72px,10vw,120px) var(--pad-x) clamp(36px,4vw,56px);
+    padding: clamp(32px,4vw,52px) var(--pad-x) clamp(20px,2.5vw,32px);
   }
   .footer__top {
     display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:48px;
@@ -494,30 +500,6 @@ function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; 
         <div ref={ref} className={["fade", visible ? "fade--in" : "", delay ? `fade--d${delay}` : "", className].filter(Boolean).join(" ")}>
             {children}
         </div>
-    );
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// ELE MARK SVG — used as fallback if ele.png not yet in place
-// ─────────────────────────────────────────────────────────────────────────────
-function EleMark({ size = 52, color = "#3D1A08" }: { size?: number; color?: string }) {
-    return (
-        <svg width={size} height={size * 0.875} viewBox="0 0 160 140" fill="none"
-             stroke={color} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M80 7 L80 97" strokeWidth="7.5" />
-            <line x1="63" y1="111" x2="97" y2="111" strokeWidth="5.5" />
-            <line x1="53" y1="126" x2="107" y2="126" strokeWidth="5.5" />
-            <path d="M74 36 L32 59 L74 82" strokeWidth="6.5" />
-            <line x1="34" y1="49" x2="68" y2="49" strokeWidth="5" />
-            <line x1="31" y1="60" x2="68" y2="60" strokeWidth="5" />
-            <line x1="36" y1="71" x2="68" y2="71" strokeWidth="5" />
-            <circle cx="40" cy="101" r="5.8" fill={color} stroke="none" />
-            <path d="M86 36 L128 59 L86 82" strokeWidth="6.5" />
-            <line x1="126" y1="49" x2="92" y2="49" strokeWidth="5" />
-            <line x1="129" y1="60" x2="92" y2="60" strokeWidth="5" />
-            <line x1="124" y1="71" x2="92" y2="71" strokeWidth="5" />
-            <circle cx="120" cy="101" r="5.8" fill={color} stroke="none" />
-        </svg>
     );
 }
 
@@ -750,8 +732,8 @@ function CraftQuote() {
     return (
         <section className="craft" aria-label="Brand philosophy">
             <Reveal>
-                <div className="craft__mark">
-                    <EleMark size={48} color="#F7F0E6" />
+                <div className="craft__mark" style={{ width: '48px', height: '48px', margin: '0 auto', filter: 'brightness(0) invert(1)' }}>
+                    <img src="/public/images/ele.png" alt="Ele mark" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                 </div>
                 <blockquote className="craft__quote">
                     "The brand celebrates natural materials and tactile surfaces. They bring
