@@ -76,7 +76,10 @@ const CSS = `
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     height: 80px;
-    transition: padding .4s var(--ease), background .4s var(--ease), box-shadow .4s var(--ease);
+    background: rgba(255,255,255,.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: height .4s var(--ease), background .4s var(--ease), box-shadow .4s var(--ease), backdrop-filter .4s var(--ease);
   }
   .nav--solid {
   height: 64px;
@@ -91,10 +94,10 @@ const CSS = `
 }
 .nav__logo img:hover { opacity: .7; }
   .nav__logo img:hover { opacity: .7; }
-  .nav__links { display: flex; gap: 48px; }
+ .nav__links { display: flex; gap: 48px; padding-right: clamp(16px, 4vw, 64px); }
   .nav__link {
     font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
-    opacity: .75; border-bottom: 1px solid transparent;
+    font-weight: 500; opacity: 1; border-bottom: 1px solid transparent;
     padding-bottom: 2px;
     transition: opacity .2s ease, border-color .2s ease;
   }
@@ -193,8 +196,8 @@ const CSS = `
   /* ── SHARED PRIMITIVES ── */
   .section { padding: var(--pad-y) var(--pad-x); }
   .eyebrow {
-    font-size: 9px; letter-spacing: .42em; text-transform: uppercase;
-    opacity: .7; display: flex; align-items: center; gap: 16px;    
+    font-size: 10px; letter-spacing: .36em; text-transform: uppercase;
+    opacity: 1; font-weight: 500; display: flex; align-items: center; gap: 16px;
     margin-bottom: clamp(32px, 4.5vw, 56px);
     font-weight: 500;
   }
@@ -210,7 +213,7 @@ const CSS = `
   /* ── STATEMENT ── */
   .statement {
     text-align: center;
-    padding: clamp(88px,13vw,160px) clamp(24px,10vw,220px);
+    padding: clamp(44px,6vw,80px) clamp(24px,10vw,220px);
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
   }
@@ -246,7 +249,7 @@ const CSS = `
     margin-top: 40px;
     display: inline-flex; align-items: center; gap: 12px;
     font-size: 10px; letter-spacing: .26em; text-transform: uppercase;
-    border-bottom: 1px solid var(--brown); padding-bottom: 3px; opacity: .65;
+    border-bottom: 1px solid var(--brown); padding-bottom: 3px; opacity: 1; font-weight: 500;
     transition: opacity .2s ease, gap .2s ease;
     width: fit-content;
   }
@@ -288,7 +291,8 @@ const CSS = `
   .card__frame img { transition: transform 1.6s var(--ease); }
   .card:hover .card__frame img { transform: scale(1.06); }
   .card__meta { padding: 18px 0 8px; }
-  .card__vol { font-size: 10px; letter-spacing: .32em; text-transform: uppercase; opacity: .65; margin-bottom: 6px; font-weight: 500; }  .card__title {
+  .card__vol { font-size: 10px; letter-spacing: .32em; text-transform: uppercase; opacity: 1; margin-bottom: 6px;  font-weight: 500; }  
+  .card__title {
     font-family: var(--font-display);
     font-size: clamp(18px,2vw,24px); font-weight: 500; color: var(--brown);
   }
@@ -399,22 +403,22 @@ const CSS = `
   }
   .footer__sub {
     font-size:9px; letter-spacing:.22em; text-transform:uppercase;
-    color:rgba(255,255,255,.6); line-height:2; max-width:260px; font-weight: 500;  }
+    color:rgba(255,255,255,.65); line-height:2; max-width:260px; font-weight: 500; font-weight: 500;  }
     color:rgba(255,255,255,.4); transition:color .2s ease;
   .footer__links {
     display:grid; grid-template-columns:repeat(2,1fr); gap:16px 72px;
   }
   .footer__link {
     font-size:10px; letter-spacing:.2em; text-transform:uppercase;
-    color:rgba(255,255,255,.4); transition:color .2s ease;
+    font-weight: 500; color:rgba(255,255,255,.75); transition:color .2s ease;
   }
   .footer__link:hover { color:rgba(255,255,255,.9); }
   .footer__bottom {
     display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;
     padding-top: clamp(28px,3.5vw,44px);
   }
-  .footer__copy { font-size:9px; letter-spacing:.12em; color:rgba(255,255,255,.2); }
-  .footer__heritage { font-size:9px; letter-spacing:.26em; text-transform:uppercase; color:rgba(214,178,151,.35); }
+ .footer__copy { font-size:9px; letter-spacing:.12em; color:rgba(255,255,255,.55); font-weight: 500; }
+  .footer__heritage { font-size:9px; letter-spacing:.26em; text-transform:uppercase; color:rgba(214,178,151,.65); font-weight: 500; }
 
   /* ── FADE REVEAL ── */
   .fade { opacity:0; transform:translateY(28px); transition:opacity .9s var(--ease), transform .9s var(--ease); }
