@@ -102,6 +102,11 @@ const CSS = `
     transition: opacity .2s ease, border-color .2s ease;
   }
   .nav__link:hover { opacity: 1; border-color: var(--brown); }
+  /* nav text readable over the hero (only while at the top) */
+  .nav:not(.nav--solid) .nav__link,
+  .nav:not(.nav--solid) .nav__tool { color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.35); }
+  .nav:not(.nav--solid) .nav__link:hover { border-color: #fff; }
+  .nav:not(.nav--solid) .nav__burger span { background: #fff; }
   .nav__burger { display: none; flex-direction: column; gap: 5px; padding: 4px; }
   .nav__burger span {
     display: block; width: 22px; height: 1.5px; background: var(--brown);
@@ -426,6 +431,155 @@ const CSS = `
  .footer__copy { font-size:9px; letter-spacing:.12em; color:rgba(255,255,255,.55); font-weight: 500; }
   .footer__heritage { font-size:9px; letter-spacing:.26em; text-transform:uppercase; color:rgba(214,178,151,.65); font-weight: 500; }
 
+  /* ── SHOP ADD-ON: NAV TOOLS ── */
+  .nav__links { margin-left: auto; padding-right: clamp(16px, 2.5vw, 36px); }
+  .nav__tools { display: flex; align-items: center; gap: 6px; padding-right: clamp(16px, 4vw, 64px); }
+  .nav__tool {
+    position: relative; width: 38px; height: 38px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--brown); transition: opacity .2s ease;
+  }
+  .nav__tool:hover { opacity: .65; }
+  .nav__badge {
+    position: absolute; top: 2px; right: 0; min-width: 17px; height: 17px; padding: 0 4px;
+    border-radius: 9px; background: var(--terracotta); color: #fff;
+    font-size: 9px; font-weight: 500; line-height: 17px; text-align: center;
+  }
+  .searchbar {
+    position: fixed; left: 0; right: 0; top: 80px; z-index: 98;
+    background: rgba(255,255,255,.97); border-bottom: 1px solid var(--border);
+    padding: 14px var(--pad-x); display: flex; align-items: center; gap: 14px;
+    transform: translateY(-120%); opacity: 0; pointer-events: none;
+    transition: transform .3s var(--ease), opacity .3s var(--ease), top .4s var(--ease);
+  }
+  .nav--solid ~ .searchbar { top: 64px; }
+  .searchbar--open { transform: none; opacity: 1; pointer-events: all; }
+  .searchbar input {
+    flex: 1; border: none; outline: none; background: transparent;
+    font-size: 15px; font-weight: 500; color: var(--brown); letter-spacing: .04em;
+  }
+  .searchbar input::placeholder { color: rgba(61,26,8,.4); }
+  .searchbar button { font-size: 10px; letter-spacing: .26em; text-transform: uppercase; font-weight: 500; }
+
+  /* ── SHOP SECTION ── */
+  .shop { border-top: 1px solid var(--border); }
+  .shop__head {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    flex-wrap: wrap; gap: 24px; margin-bottom: clamp(28px, 3.5vw, 44px);
+  }
+  .shop__filters { display: flex; flex-wrap: wrap; gap: 8px; }
+  .shop__filter {
+    padding: 9px 18px; border: 1px solid rgba(61,26,8,.25);
+    font-size: 10px; letter-spacing: .24em; text-transform: uppercase; font-weight: 500;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .shop__filter:hover { border-color: var(--brown); }
+  .shop__filter--on { background: var(--brown); color: #fff; border-color: var(--brown); }
+  .shop__note {
+    font-size: 10px; letter-spacing: .26em; text-transform: uppercase; font-weight: 500;
+    margin-bottom: 20px; opacity: .75;
+  }
+  .shop__grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: clamp(20px, 2.5vw, 36px) clamp(10px, 1.5vw, 18px);
+  }
+  .product__frame { position: relative; aspect-ratio: 3/4; overflow: hidden; background: var(--cream-tint); }
+  .product__frame img { transition: transform 1.2s var(--ease); }
+  .product:hover .product__frame img { transform: scale(1.05); }
+  .product__badge {
+    position: absolute; top: 12px; left: 12px; z-index: 2;
+    background: var(--white); color: var(--brown);
+    font-size: 9px; letter-spacing: .24em; text-transform: uppercase; font-weight: 500; padding: 5px 10px;
+  }
+  .product__add {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+    padding: 14px; background: var(--brown); color: #fff;
+    font-size: 10px; letter-spacing: .28em; text-transform: uppercase; font-weight: 500;
+    transform: translateY(101%); transition: transform .35s var(--ease);
+  }
+  .product:hover .product__add, .product__add:focus-visible { transform: none; }
+  .product__meta { padding: 14px 0 4px; display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .product__name { font-size: clamp(13px, 1.3vw, 16px); font-weight: 500; letter-spacing: .04em; text-transform: uppercase; }
+  .product__price { font-size: clamp(13px, 1.3vw, 16px); font-weight: 500; white-space: nowrap; }
+  .product__cat { font-size: 9px; letter-spacing: .26em; text-transform: uppercase; opacity: .65; font-weight: 500; margin-top: 4px; }
+  .shop__more { margin-top: clamp(32px, 4vw, 52px); text-align: center; }
+  .shop__more button {
+    padding: 15px 34px; border: 1px solid var(--brown);
+    font-size: 10px; letter-spacing: .3em; text-transform: uppercase; font-weight: 500;
+    transition: background .22s ease, color .22s ease;
+  }
+  .shop__more button:hover { background: var(--brown); color: #fff; }
+  .shop__empty { padding: 48px 0; font-size: 13px; letter-spacing: .12em; font-weight: 500; }
+
+  /* ── SHOP INFO ── */
+  .shopinfo { border-top: 1px solid var(--border); padding: clamp(40px, 5vw, 72px) var(--pad-x); }
+  .shopinfo__grid { display: grid; grid-template-columns: 1fr 2fr; gap: clamp(24px, 5vw, 80px); }
+  .shopinfo details { border-bottom: 1px solid var(--border); }
+  .shopinfo details:first-child { border-top: 1px solid var(--border); }
+  .shopinfo summary {
+    list-style: none; cursor: pointer; padding: 20px 0;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; letter-spacing: .26em; text-transform: uppercase; font-weight: 500;
+  }
+  .shopinfo summary::-webkit-details-marker { display: none; }
+  .shopinfo summary::after { content: '+'; font-size: 18px; font-weight: 400; transition: transform .25s ease; }
+  .shopinfo details[open] summary::after { transform: rotate(45deg); }
+  .shopinfo details p { padding: 0 0 22px; max-width: 620px; font-size: 14px; line-height: 1.85; font-weight: 500; opacity: .85; }
+
+  /* ── CART DRAWER ── */
+  .cart__scrim {
+    position: fixed; inset: 0; z-index: 200; background: rgba(20,8,2,.45);
+    opacity: 0; pointer-events: none; transition: opacity .3s ease;
+  }
+  .cart__scrim--open { opacity: 1; pointer-events: all; }
+  .cart {
+    position: fixed; top: 0; right: 0; bottom: 0; z-index: 201;
+    width: min(440px, 100vw); background: var(--white); color: var(--brown);
+    display: flex; flex-direction: column;
+    transform: translateX(102%); transition: transform .4s var(--ease);
+    box-shadow: -1px 0 0 var(--border);
+  }
+  .cart--open { transform: none; }
+  .cart__head {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px 24px; border-bottom: 1px solid var(--border);
+    font-size: 11px; letter-spacing: .3em; text-transform: uppercase; font-weight: 500;
+  }
+  .cart__items { flex: 1; overflow-y: auto; padding: 8px 24px; }
+  .cart__empty { padding: 48px 0; text-align: center; font-size: 12px; letter-spacing: .14em; font-weight: 500; line-height: 2; }
+  .cart__empty a, .cart__empty button { border-bottom: 1px solid var(--brown); padding-bottom: 2px; }
+  .citem { display: grid; grid-template-columns: 72px 1fr; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border); }
+  .citem__img { aspect-ratio: 3/4; overflow: hidden; background: var(--cream-tint); }
+  .citem__name { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; font-weight: 500; }
+  .citem__price { font-size: 13px; font-weight: 500; margin-top: 4px; }
+  .citem__row { margin-top: 12px; display: flex; align-items: center; justify-content: space-between; }
+  .qty { display: inline-flex; align-items: center; border: 1px solid rgba(61,26,8,.25); }
+  .qty button { width: 30px; height: 30px; font-size: 15px; }
+  .qty span { min-width: 28px; text-align: center; font-size: 12px; font-weight: 500; }
+  .citem__rm { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; font-weight: 500; opacity: .7; border-bottom: 1px solid currentColor; }
+  .cart__foot { padding: 20px 24px 26px; border-top: 1px solid var(--border); }
+  .cart__sub { display: flex; justify-content: space-between; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; font-weight: 500; margin-bottom: 8px; }
+  .cart__hint { font-size: 11px; line-height: 1.7; opacity: .7; font-weight: 500; margin-bottom: 16px; }
+  .cart__checkout {
+    width: 100%; padding: 16px; background: var(--brown); color: #fff; border: 1px solid var(--brown);
+    font-size: 10px; letter-spacing: .3em; text-transform: uppercase; font-weight: 500;
+    transition: background .22s ease, color .22s ease;
+  }
+  .cart__checkout:hover { background: transparent; color: var(--brown); }
+  .cart__done { font-size: 12px; line-height: 1.8; letter-spacing: .06em; font-weight: 500; padding: 6px 0; }
+
+  @media(max-width:1024px) {
+    .shop__grid { grid-template-columns: repeat(2, 1fr); }
+    .shopinfo__grid { grid-template-columns: 1fr; }
+  }
+  @media(max-width:680px) {
+    .nav__tools { padding-right: 0; gap: 2px; }
+    .nav__burger { margin-right: 16px; }
+    .searchbar { padding: 12px 20px; }
+    .product__add { transform: none; position: static; padding: 12px; }
+    .product__meta { flex-direction: column; gap: 2px; }
+  }
+
   /* ── FADE REVEAL ── */
   .fade { opacity:0; transform:translateY(28px); transition:opacity .9s var(--ease), transform .9s var(--ease); }
   .fade--d1 { transition-delay:.1s; }
@@ -506,7 +660,7 @@ function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; 
 // ─────────────────────────────────────────────────────────────────────────────
 // NAV
 // ─────────────────────────────────────────────────────────────────────────────
-function Nav() {
+function Nav({ cartCount, onCart, onSearch }: { cartCount: number; onCart: () => void; onSearch: () => void }) {
     const scrolled = useScrolled();
     const [open, setOpen] = useState(false);
 
@@ -516,6 +670,7 @@ function Nav() {
     }, [open]);
 
     const links = [
+        { label: "Shop", href: "#shop" },
         { label: "Collections", href: "#collections" },
         { label: "About", href: "#about" },
         { label: "Contact", href: "#contact" },
@@ -536,6 +691,15 @@ function Nav() {
                 <ul className="nav__links" role="list">
                     {links.map(l => <li key={l.href}><a href={l.href} className="nav__link">{l.label}</a></li>)}
                 </ul>
+                <div className="nav__tools">
+                    <button className="nav__tool" onClick={onSearch} aria-label="Search products">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+                    </button>
+                    <button className="nav__tool" onClick={onCart} aria-label={`Open cart, ${cartCount} items`}>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg>
+                        {cartCount > 0 && <span className="nav__badge">{cartCount}</span>}
+                    </button>
+                </div>
                 <button
                     className={`nav__burger${open ? " nav__burger--open" : ""}`}
                     onClick={() => setOpen(!open)}
@@ -726,6 +890,177 @@ function Collections() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// SHOP — products, cart, info (no payments; browse-only)
+// ─────────────────────────────────────────────────────────────────────────────
+type Product = { id: string; name: string; price: number; cat: string; img: string; pos: string; zoom?: number; badge?: string };
+
+// TODO: replace names / prices / photos with the real catalogue
+const PRODUCTS: Product[] = [
+    { id: "p1", name: "Foundation Jacket",   price: 145000, cat: "Outerwear", img: IMG.look, pos: "center 20%", badge: "New" },
+    { id: "p2", name: "Structured Trouser",  price:  78000, cat: "Bottoms",   img: IMG.beach, pos: "left 85%", zoom: 1.5 },
+    { id: "p3", name: "Proportional Set",    price: 165000, cat: "Sets",      img: IMG.hero, pos: "center 25%", badge: "New" },
+    { id: "p4", name: "Àwéléwà Wrap Top",    price:  62000, cat: "Tops",      img: IMG.rack, pos: "center 30%" },
+    { id: "p5", name: "Earthy Column Dress", price: 120000, cat: "Dresses",   img: IMG.hero, pos: "center 60%", zoom: 1.3 },
+    { id: "p6", name: "Sculptural Vest",     price:  54000, cat: "Tops",      img: IMG.look, pos: "center 45%", zoom: 1.4 },
+    { id: "p7", name: "Everyday Wide-Leg",   price:  82000, cat: "Bottoms",   img: IMG.beach, pos: "right 80%", zoom: 1.4 },
+    { id: "p8", name: "Tailored Overshirt",  price:  98000, cat: "Outerwear", img: IMG.rack, pos: "left 40%", zoom: 1.5 },
+];
+const naira = (n: number) => "₦" + n.toLocaleString("en-NG");
+
+function ProductImg({ p }: { p: Product }) {
+    return <img src={p.img} alt={p.name} loading="lazy"
+                style={{ objectPosition: p.pos, transform: p.zoom ? `scale(${p.zoom})` : undefined, transformOrigin: p.pos }} />;
+}
+
+function Shop({ query, onAdd }: { query: string; onAdd: (id: string) => void }) {
+    const [cat, setCat] = useState("All");
+    const [all, setAll] = useState(false);
+    const cats = ["All", ...Array.from(new Set(PRODUCTS.map(p => p.cat)))];
+    const q = query.trim().toLowerCase();
+    const filtered = PRODUCTS.filter(p =>
+        (cat === "All" || p.cat === cat) &&
+        (!q || p.name.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q)));
+    const browsing = cat !== "All" || !!q;
+    const shown = browsing || all ? filtered : filtered.slice(0, 4);
+
+    return (
+        <section id="shop" className="section shop" aria-labelledby="shop-heading">
+            <Reveal>
+                <span className="eyebrow">Shop</span>
+                <div className="shop__head">
+                    <h2 className="heading" id="shop-heading">Shop <em>now.</em></h2>
+                    <div className="shop__filters" role="tablist" aria-label="Filter products">
+                        {cats.map(c => (
+                            <button key={c} role="tab" aria-selected={cat === c}
+                                    className={`shop__filter${cat === c ? " shop__filter--on" : ""}`}
+                                    onClick={() => { setCat(c); setAll(false); }}>{c}</button>
+                        ))}
+                    </div>
+                </div>
+                {q && <p className="shop__note">Results for “{query.trim()}”</p>}
+            </Reveal>
+            {shown.length === 0 ? (
+                <p className="shop__empty">No products found.</p>
+            ) : (
+                <div className="shop__grid">
+                    {shown.map(p => (
+                        <article key={p.id} className="product">
+                            <div className="product__frame">
+                                {p.badge && <span className="product__badge">{p.badge}</span>}
+                                <ProductImg p={p} />
+                                <button className="product__add" onClick={() => onAdd(p.id)}>Add to cart</button>
+                            </div>
+                            <div className="product__meta">
+                                <div>
+                                    <h3 className="product__name">{p.name}</h3>
+                                    <p className="product__cat">{p.cat}</p>
+                                </div>
+                                <p className="product__price">{naira(p.price)}</p>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+            )}
+            {!browsing && filtered.length > 4 && (
+                <div className="shop__more">
+                    <button onClick={() => setAll(!all)}>{all ? "Show Less" : "Show All Products"}</button>
+                </div>
+            )}
+        </section>
+    );
+}
+
+function ShopInfo() {
+    // TODO: confirm the real policies with the brand owner
+    const items = [
+        { q: "How to order", a: "Add your pieces to the cart and send your order request. We will confirm availability, sizing and payment details with you directly." },
+        { q: "Processing time", a: "Each piece is made with care. Orders are typically prepared within 5–10 working days." },
+        { q: "Shipping & delivery", a: "We ship within Lagos and nationwide, with international delivery on request. Delivery times and costs are confirmed when your order is placed." },
+        { q: "Cancellations & fit", a: "Because pieces are construction-led and made to order, please contact us before production begins to change or cancel an order." },
+    ];
+    return (
+        <section className="shopinfo" aria-label="Ordering information">
+            <div className="shopinfo__grid">
+                <span className="eyebrow">Ordering</span>
+                <div>
+                    {items.map(i => (
+                        <details key={i.q}><summary>{i.q}</summary><p>{i.a}</p></details>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function SearchBar({ open, query, setQuery, onClose }: { open: boolean; query: string; setQuery: (v: string) => void; onClose: () => void }) {
+    const ref = useRef<HTMLInputElement>(null);
+    useEffect(() => { if (open) ref.current?.focus(); }, [open]);
+    return (
+        <div className={`searchbar${open ? " searchbar--open" : ""}`} role="search">
+            <input ref={ref} value={query} placeholder="Search products" aria-label="Search products"
+                   onChange={e => setQuery(e.target.value)}
+                   onKeyDown={e => {
+                       if (e.key === "Enter") { onClose(); document.getElementById("shop")?.scrollIntoView({ behavior: "smooth" }); }
+                       if (e.key === "Escape") onClose();
+                   }} />
+            <button onClick={() => { setQuery(""); onClose(); }}>Close</button>
+        </div>
+    );
+}
+
+function CartDrawer({ open, cart, onClose, onQty, onClear }: {
+    open: boolean; cart: Record<string, number>; onClose: () => void;
+    onQty: (id: string, d: number) => void; onClear: () => void;
+}) {
+    const [sent, setSent] = useState(false);
+    const lines = PRODUCTS.filter(p => cart[p.id] > 0);
+    const subtotal = lines.reduce((t, p) => t + p.price * cart[p.id], 0);
+    useEffect(() => { if (!open) setSent(false); }, [open]);
+    return (
+        <>
+            <div className={`cart__scrim${open ? " cart__scrim--open" : ""}`} onClick={onClose} aria-hidden="true" />
+            <aside className={`cart${open ? " cart--open" : ""}`} aria-label="Shopping cart" aria-hidden={!open}>
+                <div className="cart__head">
+                    <span>Your Cart</span>
+                    <button onClick={onClose} aria-label="Close cart">Close</button>
+                </div>
+                <div className="cart__items">
+                    {sent ? (
+                        <p className="cart__empty">Thank you. Your order request has been noted — we will be in touch to confirm.</p>
+                    ) : lines.length === 0 ? (
+                        <p className="cart__empty">Your cart is empty.<br />
+                            <a href="#shop" onClick={onClose}>Continue shopping</a></p>
+                    ) : lines.map(p => (
+                        <div key={p.id} className="citem">
+                            <div className="citem__img"><ProductImg p={p} /></div>
+                            <div>
+                                <p className="citem__name">{p.name}</p>
+                                <p className="citem__price">{naira(p.price)}</p>
+                                <div className="citem__row">
+                                    <div className="qty">
+                                        <button onClick={() => onQty(p.id, -1)} aria-label="Decrease quantity">−</button>
+                                        <span>{cart[p.id]}</span>
+                                        <button onClick={() => onQty(p.id, 1)} aria-label="Increase quantity">+</button>
+                                    </div>
+                                    <button className="citem__rm" onClick={() => onQty(p.id, -cart[p.id])}>Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                {!sent && lines.length > 0 && (
+                    <div className="cart__foot">
+                        <div className="cart__sub"><span>Subtotal</span><span>{naira(subtotal)}</span></div>
+                        <p className="cart__hint">Shipping is confirmed after you place your order. Online payment is not available yet.</p>
+                        <button className="cart__checkout" onClick={() => { setSent(true); onClear(); }}>Place Order Request</button>
+                    </div>
+                )}
+            </aside>
+        </>
+    );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // CRAFT QUOTE — dark section
 // ─────────────────────────────────────────────────────────────────────────────
 function CraftQuote() {
@@ -856,6 +1191,18 @@ function Footer() {
 // APP
 // ─────────────────────────────────────────────────────────────────────────────
 export default function App() {
+    const [cart, setCart] = useState<Record<string, number>>({});
+    const [cartOpen, setCartOpen] = useState(false);
+    const [searchOpen, setSearchOpen] = useState(false);
+    const [query, setQuery] = useState("");
+    const cartCount = Object.values(cart).reduce((a, b) => a + b, 0);
+    const addToCart = (id: string) => { setCart(c => ({ ...c, [id]: (c[id] || 0) + 1 })); setCartOpen(true); };
+    const changeQty = (id: string, d: number) => setCart(c => {
+        const n = (c[id] || 0) + d; const next = { ...c };
+        if (n <= 0) delete next[id]; else next[id] = n;
+        return next;
+    });
+
     useEffect(() => {
         const id = "aw-styles";
         if (document.getElementById(id)) return;
@@ -870,10 +1217,14 @@ export default function App() {
             <a href="#collections" style={{ position:"absolute", left:"-9999px", width:"1px", height:"1px", overflow:"hidden" }}>
                 Skip to main content
             </a>
-            <Nav />
+            <Nav cartCount={cartCount} onCart={() => setCartOpen(true)} onSearch={() => setSearchOpen(o => !o)} />
+            <SearchBar open={searchOpen} query={query} setQuery={setQuery} onClose={() => setSearchOpen(false)} />
+            <CartDrawer open={cartOpen} cart={cart} onClose={() => setCartOpen(false)} onQty={changeQty} onClear={() => setCart({})} />
             <main>
                 <Hero />
                 <Marquee />
+                <Shop query={query} onAdd={addToCart} />
+                <ShopInfo />
                 <Statement />
                 <EditorialSplit />
                 <RackFeature />
